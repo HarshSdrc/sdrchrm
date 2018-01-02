@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Harsh Pratyush (harsh@sdrc.co.in)
  *
@@ -35,6 +37,7 @@ public class DeviceDetails {
 	@Column(nullable = false, unique = true)
 	private String deviceCode;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private TypeDetail deviceType;

@@ -3,7 +3,9 @@
  */
 package org.sdrc.hrm.util;
 
+import org.sdrc.hrm.domain.DeviceDetails;
 import org.sdrc.hrm.domain.EmployeeDetails;
+import org.sdrc.hrm.model.DeviceModel;
 import org.sdrc.hrm.model.EmployeeModel;
 import org.springframework.stereotype.Component;
 
@@ -28,5 +30,18 @@ public class DomainToModelConverter {
 
 		}
 		return employeeModel;
+	}
+	
+	public DeviceModel deviceDomainToModel(DeviceDetails deviceDetails)
+	{
+		DeviceModel deviceModel= new DeviceModel();
+		if(deviceDetails!=null)
+		{
+			ObjectMapper objectMapper=new ObjectMapper();
+			deviceModel = objectMapper.convertValue(deviceDetails, DeviceModel.class);
+			deviceModel.setDeviceType(deviceDetails.getDeviceType().getName());
+			deviceModel.setDeviceTypeId(deviceDetails.getDeviceType().getId());
+		}
+		return deviceModel;
 	}
 }
