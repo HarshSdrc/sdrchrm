@@ -4,6 +4,7 @@
 package org.sdrc.hrm.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +12,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Email;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author Harsh Pratyush (harsh@sdrc.co.in)
@@ -64,6 +71,7 @@ public class EmployeeDetails {
 	private String createdBy;
 	
 	@CreationTimestamp
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(nullable=false)
 	private Timestamp createdDate;
 	
@@ -72,9 +80,34 @@ public class EmployeeDetails {
 	@UpdateTimestamp
 	private Timestamp updatedDate;
 	
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(nullable=false)
 	private TypeDetail gender;
+	
+	// == Bi-directinal mapping===//
+	
+	@OneToMany(mappedBy="employeeId")
+	@JsonIgnore
+	private List<EmployeeRoleMapping> employeeRoleMappings;
+	
+	
+	private String password;
+
+	@OneToMany(mappedBy="empId")
+	private List<FeedBack> feedBack;
+	
+	@OneToMany(mappedBy="trainerName")
+	private List<CourseAnnouncement> course;
+	
+	public List<FeedBack> getFeedBack() {
+		return feedBack;
+	}
+
+	public void setFeedBack(List<FeedBack> feedBack) {
+		this.feedBack = feedBack;
+	}
 
 	public Integer getEmployeeId() {
 		return employeeId;
@@ -196,12 +229,29 @@ public class EmployeeDetails {
 		this.updatedDate = updatedDate;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public TypeDetail getGender() {
 		return gender;
 	}
 
 	public void setGender(TypeDetail gender) {
 		this.gender = gender;
+	}
+
+	public List<EmployeeRoleMapping> getEmployeeRoleMappings() {
+		return employeeRoleMappings;
+	}
+
+	public void setEmployeeRoleMappings(
+			List<EmployeeRoleMapping> employeeRoleMappings) {
+		this.employeeRoleMappings = employeeRoleMappings;
 	} 
 	
 }
