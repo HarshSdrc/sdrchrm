@@ -27,5 +27,13 @@ public interface DeviceService {
 	 * @return Map<String,List<{@link DeviceModel}}>>
 	 */
 	public Map<String,List<DeviceModel>> getAllDevice();
+	
+	
+	/**
+	 * This method will find the device history for given device id.
+	 * @param deviceId-Primary key of device details
+	 * @return {@link ReturnModel}
+	 */
+	public ReturnModel getDeviceHistory(int deviceId);
 
 }

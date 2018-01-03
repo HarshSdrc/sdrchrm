@@ -25,4 +25,6 @@ public interface DeviceDetailsRepository {
 
 	DeviceDetails findTop1ByOrderByCreatedDateDesc();
 
+	DeviceDetails findByDeviceId(int deviceId);
+
 }

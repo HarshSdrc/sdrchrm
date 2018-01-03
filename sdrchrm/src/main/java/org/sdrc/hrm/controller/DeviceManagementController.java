@@ -131,5 +131,45 @@ public class DeviceManagementController {
 		}
 		 return returnModel;
 	}
+	
+	@RequestMapping(value="/getDeviceHistory",method=RequestMethod.POST)
+	public ReturnModel getDeviceHistory(@RequestBody UserDataModel userDataModel)
+	{
+		ReturnModel returnModel = new ReturnModel();
+		
+		try
+		{
+		UserDetails userDetails=userDetailsService.loadUserByUsername(userDataModel.getUserName());
+		
+		
+		userAuthenticationProvider.additionalAuthenticationChecks(userDetails,new UsernamePasswordAuthenticationToken(userDataModel.getUserName(),userDataModel.getPassword(),userDetails.getAuthorities()));
+	
+		 Object userDetail = SecurityContextHolder.getContext().getAuthentication().getDetails();
+		 
+		 if (userDetail instanceof UserDetails  ) {
+	        	
+			 userDetails = (UserDetails) userDetail;
+			 if(userDetails.getAuthorities()!=null&&userDetails.getAuthorities().contains((new SimpleGrantedAuthority("SysAdmin"))))
+			 {
+				 return deviceService.getDeviceHistory((Integer)userDataModel.getSubmissionObject());
+				 
+			 }
+		 }
+		 else
+		 {
+				returnModel.setDescription("Not Authorized");
+				returnModel.setMessage("Not Authorized");
+				returnModel.setStatusCode(400);
+		 }
+		 
+		}
+		catch (Exception e)
+		{
+			returnModel.setDescription("Authentication Failed");
+			returnModel.setMessage("Please Login");
+			returnModel.setStatusCode(400);
+		}
+		 return returnModel;
+	}
 
 }

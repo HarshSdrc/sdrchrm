@@ -4,13 +4,16 @@
 package org.sdrc.hrm.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.sdrc.hrm.domain.DeviceDetails;
+import org.sdrc.hrm.domain.EmployeeDeviceMapping;
 import org.sdrc.hrm.domain.TypeDetail;
 import org.sdrc.hrm.model.DeviceModel;
+import org.sdrc.hrm.model.EmployeeDeviceMappingModel;
 import org.sdrc.hrm.model.ReturnModel;
 import org.sdrc.hrm.repository.DeviceDetailsRepository;
 import org.sdrc.hrm.util.DomainToModelConverter;
@@ -118,6 +121,38 @@ public class DeviceServiceImpl implements DeviceService {
 		}
 		
 		return deviceModelListMap;
+	}
+	
+	@Override
+	public ReturnModel getDeviceHistory(int deviceId)
+	{
+		DeviceDetails deviceDetails = deviceDetailsRepository.findByDeviceId(deviceId);
+		ReturnModel returnModel = new ReturnModel();
+		if(deviceDetails!=null)
+		{
+		DeviceModel deviceModel = domainToModelConverter.deviceDomainToModel(deviceDetails);
+		List<EmployeeDeviceMappingModel> employeeDeviceMappingModels=new ArrayList<EmployeeDeviceMappingModel>();
+		
+		for(EmployeeDeviceMapping deviceMapping:deviceDetails.getEmployeeDeviceMapping())
+		{
+			employeeDeviceMappingModels.add(domainToModelConverter.employeeDeviceMappintToModel(deviceMapping));
+		}
+		
+		returnModel.setStatusCode(200);
+		Map<String,Object> deviceHistory = new  HashMap<String, Object>();
+		deviceHistory.put("deviceDetail", deviceModel);
+		deviceHistory.put("deviceHistory", employeeDeviceMappingModels);
+		returnModel.setObject(deviceHistory);
+			
+		}
+		else
+		{
+			returnModel.setDescription("Please register this device");
+			returnModel.setMessage("Sorry Can't find the device");
+			returnModel.setStatusCode(400);
+		}
+		
+		return returnModel;
 	}
 
 }
