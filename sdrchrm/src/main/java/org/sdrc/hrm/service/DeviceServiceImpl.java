@@ -40,22 +40,44 @@ public class DeviceServiceImpl implements DeviceService {
 
 		ReturnModel returnModel = new ReturnModel();
 
-		if (deviceDetails != null) {
+		if (deviceDetails == null) {
+			DeviceDetails device= deviceDetailsRepository.findTop1ByDeviceTypeIdOrderByCreatedDateDesc(deviceModel.getDeviceTypeId());
+			deviceDetails=new DeviceDetails();
 			deviceDetails.setDescription(deviceModel.getDescription());
 			deviceDetails.setDeviceName(deviceModel.getDeviceName());
+			if(device==null)
+			{
+				deviceDetails.setDeviceCode("sdrc/device/001");
+			}
+			else
+			{
+				int deviceNumb=1+Integer.parseInt(device.getDeviceCode().split("sdrc/device/")[1]);
+				if(deviceNumb>=100)
+				{
+					deviceDetails.setDeviceCode("sdrc/device/"+deviceNumb);
+				}
+				else
+				{
+					deviceDetails.setDeviceCode("sdrc/device/"+	String.format("%03d",deviceNumb));
+				}	
+			
+				
+			}
+			
 			TypeDetail deviceType = new TypeDetail();
 			deviceType.setId(deviceModel.getDeviceTypeId());
 			deviceDetails.setDeviceType(deviceType);
 			deviceDetails.setCreatedBy(deviceDetails.getCreatedBy());
 			deviceDetails.setBarCode(deviceModel.getBarCode());
+			deviceDetails.setCreatedBy(deviceModel.getCreatedBy());
 
-			deviceDetailsRepository.save(deviceDetails);
+			DeviceDetails deviceSaved=deviceDetailsRepository.save(deviceDetails);
 
 			returnModel.setStatusCode(200);
 			returnModel.setDescription("Success");
 			returnModel.setMessage("Success");
 			returnModel.setObject(domainToModelConverter
-					.deviceDomainToModel(deviceDetails));
+					.deviceDomainToModel(deviceSaved));
 		}
 
 		else {

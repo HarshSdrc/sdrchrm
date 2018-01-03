@@ -17,4 +17,6 @@ public interface DeviceDetailsRepository {
 	@Transactional
 	DeviceDetails save(DeviceDetails deviceDetails);
 
+	DeviceDetails findTop1ByDeviceTypeIdOrderByCreatedDateDesc(int deviceTypeId);
+
 }

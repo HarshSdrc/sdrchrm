@@ -32,6 +32,7 @@ public class TypeDetail {
 	@JoinColumn(name = "type_id_fk", nullable = false)
 	private Type typeId;
 
+
 	@CreationTimestamp
 	@Column(name = "created_date")
 	private Timestamp createdDate;
@@ -43,6 +44,9 @@ public class TypeDetail {
 
 	@Column(name = "order_level")
 	private Integer orderLevel;
+	
+	@Column(name="description")
+	private String description;
 
 
 	public TypeDetail() {
@@ -100,5 +104,11 @@ public class TypeDetail {
 	public void setOrderLevel(Integer orderLevel) {
 		this.orderLevel = orderLevel;
 	}
+	public String getDescription() {
+		return description;
+	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

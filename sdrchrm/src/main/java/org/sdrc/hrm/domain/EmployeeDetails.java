@@ -4,6 +4,7 @@
 package org.sdrc.hrm.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -81,6 +83,15 @@ public class EmployeeDetails {
 	@ManyToOne
 	@JoinColumn(nullable=false)
 	private TypeDetail gender;
+	
+	// == Bi-directinal mapping===//
+	
+	@OneToMany(mappedBy="employeeId")
+	@JsonIgnore
+	private List<EmployeeRoleMapping> employeeRoleMappings;
+	
+	
+	private String password;
 
 	public Integer getEmployeeId() {
 		return employeeId;
@@ -202,12 +213,29 @@ public class EmployeeDetails {
 		this.updatedDate = updatedDate;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public TypeDetail getGender() {
 		return gender;
 	}
 
 	public void setGender(TypeDetail gender) {
 		this.gender = gender;
+	}
+
+	public List<EmployeeRoleMapping> getEmployeeRoleMappings() {
+		return employeeRoleMappings;
+	}
+
+	public void setEmployeeRoleMappings(
+			List<EmployeeRoleMapping> employeeRoleMappings) {
+		this.employeeRoleMappings = employeeRoleMappings;
 	} 
 	
 }

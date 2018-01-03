@@ -45,6 +45,8 @@ public class EmployeeModel {
 	private String updatedDate;
 	
 	private String gender;
+	
+	private String password;
 
 	public Integer getEmployeeId() {
 		return employeeId;
@@ -172,6 +174,14 @@ public class EmployeeModel {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }
