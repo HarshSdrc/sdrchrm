@@ -3,6 +3,11 @@
  */
 package org.sdrc.hrm.service;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.sdrc.hrm.domain.DeviceDetails;
 import org.sdrc.hrm.domain.TypeDetail;
 import org.sdrc.hrm.model.DeviceModel;
@@ -41,7 +46,7 @@ public class DeviceServiceImpl implements DeviceService {
 		ReturnModel returnModel = new ReturnModel();
 
 		if (deviceDetails == null) {
-			DeviceDetails device= deviceDetailsRepository.findTop1ByDeviceTypeIdOrderByCreatedDateDesc(deviceModel.getDeviceTypeId());
+			DeviceDetails device= deviceDetailsRepository.findTop1ByOrderByCreatedDateDesc();
 			deviceDetails=new DeviceDetails();
 			deviceDetails.setDescription(deviceModel.getDescription());
 			deviceDetails.setDeviceName(deviceModel.getDeviceName());
@@ -86,6 +91,33 @@ public class DeviceServiceImpl implements DeviceService {
 			returnModel.setMessage("failure");
 		}
 		return returnModel;
+	}
+
+	@Override
+	public Map<String, List<DeviceModel>> getAllDevice() {
+		
+		Map<String, List<DeviceModel>> deviceModelListMap = new LinkedHashMap<String, List<DeviceModel>>();
+		
+		List<DeviceModel> deviceModels = new ArrayList<DeviceModel>();
+		
+		List<DeviceDetails> deviceDetailsList=deviceDetailsRepository.findAll();
+		
+		for(DeviceDetails deviceDetails:deviceDetailsList)
+		{
+			if(deviceModelListMap.containsKey(deviceDetails.getDeviceType().getName()))
+			{
+				deviceModelListMap.get(deviceDetails.getDeviceType().getName()).add(domainToModelConverter.deviceDomainToModel(deviceDetails));
+			}
+			else
+			{
+				deviceModels = new ArrayList<DeviceModel>();
+				deviceModels.add(domainToModelConverter.deviceDomainToModel(deviceDetails));
+				deviceModelListMap.put(deviceDetails.getDeviceType().getName(), deviceModels);
+			}
+			
+		}
+		
+		return deviceModelListMap;
 	}
 
 }

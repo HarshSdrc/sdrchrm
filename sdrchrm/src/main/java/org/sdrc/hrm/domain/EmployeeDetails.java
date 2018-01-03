@@ -84,15 +84,15 @@ public class EmployeeDetails {
 	@JoinColumn(nullable=false)
 	private TypeDetail gender;
 	
+	
+	@Column(nullable=false)
+	private String password;
+	
 	// == Bi-directinal mapping===//
 	
 	@OneToMany(mappedBy="employeeId")
 	@JsonIgnore
 	private List<EmployeeRoleMapping> employeeRoleMappings;
-	
-	
-	private String password;
-
 
 	@OneToMany(mappedBy="empId")
 	private List<FeedBack> feedBack;
