@@ -40,12 +40,12 @@ public class DeviceManagementController {
 	@RequestMapping(value="/addDevice",method=RequestMethod.POST)
 	public ReturnModel addDevice(@RequestBody UserDataModel userDataModel)
 	{
-		
-		UserDetails userDetails=userDetailsService.loadUserByUsername(userDataModel.getUserName());
-		
 		ReturnModel returnModel = new ReturnModel();
 		try
 		{
+		UserDetails userDetails=userDetailsService.loadUserByUsername(userDataModel.getUserName());
+		
+		
 		userAuthenticationProvider.additionalAuthenticationChecks(userDetails,new UsernamePasswordAuthenticationToken(userDataModel.getUserName(),userDataModel.getPassword(),userDetails.getAuthorities()));
 	
 		 Object userDetail = SecurityContextHolder.getContext().getAuthentication().getDetails();

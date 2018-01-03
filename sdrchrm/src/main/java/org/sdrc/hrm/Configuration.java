@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -46,5 +47,5 @@ public class Configuration  extends  SpringBootServletInitializer{
 	public MessageDigestPasswordEncoder passwordEncoder() {
 		return new MessageDigestPasswordEncoder("sha-256");
 	}
-
+	
 }
