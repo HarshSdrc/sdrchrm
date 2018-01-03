@@ -3,8 +3,6 @@
  */
 package org.sdrc.hrm.model;
 
-import java.sql.Timestamp;
-
 import org.hibernate.validator.constraints.Email;
 
 /**
@@ -40,13 +38,15 @@ public class EmployeeModel {
 	
 	private String createdBy;
 	
-	private Timestamp createdDate;
+	private String createdDate;
 	
 	private String updatedBy;
 	
-	private Timestamp updatedDate;
+	private String updatedDate;
 	
 	private String gender;
+	
+	private String password;
 
 	public Integer getEmployeeId() {
 		return employeeId;
@@ -144,11 +144,11 @@ public class EmployeeModel {
 		this.createdBy = createdBy;
 	}
 
-	public Timestamp getCreatedDate() {
+	public String getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Timestamp createdDate) {
+	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
 
@@ -160,11 +160,11 @@ public class EmployeeModel {
 		this.updatedBy = updatedBy;
 	}
 
-	public Timestamp getUpdatedDate() {
+	public String getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public void setUpdatedDate(Timestamp updatedDate) {
+	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 
@@ -174,6 +174,14 @@ public class EmployeeModel {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

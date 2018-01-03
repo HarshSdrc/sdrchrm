@@ -13,4 +13,6 @@ public interface EmployeeRepository {
 
 	EmployeeDetails findByEmployeeCode(String empCode);
 
+	EmployeeDetails findByEmailIdAndIsLiveTrue(String emailId);
+
 }

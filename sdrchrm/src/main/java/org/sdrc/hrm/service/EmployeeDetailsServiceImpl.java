@@ -6,6 +6,7 @@ package org.sdrc.hrm.service;
 import org.sdrc.hrm.domain.EmployeeDetails;
 import org.sdrc.hrm.model.EmployeeModel;
 import org.sdrc.hrm.repository.EmployeeRepository;
+import org.sdrc.hrm.util.DomainToModelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService {
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
+	
+	@Autowired 
+	DomainToModelConverter  domainToModelConverter;
 
 	/* (non-Javadoc)
 	 * @see org.sdrc.mis.service.EmployeeDetailsService#findEmployeeByCode(java.lang.String)
@@ -26,12 +30,7 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService {
 	public EmployeeModel findEmployeeByCode(String empCode) {
 		
 		EmployeeDetails employeeDetails = employeeRepository.findByEmployeeCode(empCode);
-		EmployeeModel employeeModel = new EmployeeModel();
-		if(employeeDetails !=null)
-		{
-			
-		}
-		return employeeModel;
+		return domainToModelConverter.employeeDomainToModel(employeeDetails);
 	}
 
 }
