@@ -2,22 +2,25 @@ package org.sdrc.hrm.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "feedback_question")
 public class FeedBackQuestionMaster {
 
+	@Id
 	@Column(name = "feedback_qstn_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer questionId;
 
-	@Column(name = "questions")
 	private String questions;
 
-	@Column(name = "order")
+	@Column(nullable=false)
 	private Integer order;
 
-	@Column(name = "remarks")
 	private String remarks;
 
 	public Integer getQuestionId() {

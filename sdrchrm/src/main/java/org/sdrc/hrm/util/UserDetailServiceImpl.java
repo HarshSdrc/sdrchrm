@@ -29,7 +29,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 			throws UsernameNotFoundException {
         EmployeeDetails employee = employeeRepository.findByEmailIdAndIsLiveTrue(username);
 
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
         for (EmployeeRoleMapping empRoleMapping : employee.getEmployeeRoleMappings()){
             grantedAuthorities.add(new SimpleGrantedAuthority(empRoleMapping.getRoleId().getRoleName()));
         }
