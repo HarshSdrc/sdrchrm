@@ -19,7 +19,7 @@ public class FeedBackQuestionMaster {
 	private String questions;
 
 	@Column(nullable=false)
-	private Integer order;
+	private Integer orderid;
 
 	private String remarks;
 
@@ -39,13 +39,6 @@ public class FeedBackQuestionMaster {
 		this.questions = questions;
 	}
 
-	public Integer getOrder() {
-		return order;
-	}
-
-	public void setOrder(Integer order) {
-		this.order = order;
-	}
 
 	public String getRemarks() {
 		return remarks;
@@ -53,6 +46,14 @@ public class FeedBackQuestionMaster {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public Integer getOrderid() {
+		return orderid;
+	}
+
+	public void setOrderid(Integer orderid) {
+		this.orderid = orderid;
 	}
 
 }
