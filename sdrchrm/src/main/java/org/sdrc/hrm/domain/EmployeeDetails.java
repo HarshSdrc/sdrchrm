@@ -29,77 +29,82 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class EmployeeDetails {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer employeeId;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String employeeName;
-	
+
 	@Email
-	@Column(nullable=false,unique=true)
+	@Column(nullable = false, unique = true)
 	private String emailId;
-	
-	@Column(nullable=false,unique=true)
+
+	@Column(nullable = false, unique = true)
 	private long contactNumber;
-	
-	@Column(nullable=true,unique=true)
-	private String voterId; 
-	
-	@Column(nullable=true,unique=true)
+
+	@Column(nullable = true, unique = true)
+	private String voterId;
+
+	@Column(nullable = true, unique = true)
 	private String pancard;
-	
-	@Column(nullable=true,unique=true)
+
+	@Column(nullable = true, unique = true)
 	private String passport;
-	
-	@Column(nullable=false,unique=true)
+
+	@Column(nullable = false, unique = true)
 	private String employeeCode;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String fatherName;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String motherName;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private boolean isLive;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String createdBy;
-	
+
 	@CreationTimestamp
-	@DateTimeFormat(pattern="dd/MM/yyyy")
-	@Column(nullable=false)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(nullable = false)
 	private Timestamp createdDate;
-	
+
 	private String updatedBy;
-	
+
 	@UpdateTimestamp
 	private Timestamp updatedDate;
-	
-	
+
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(nullable=false)
+	@JoinColumn(nullable = false)
 	private TypeDetail gender;
+
+	
+	@Column(nullable=false)
+	private String password;
 	
 	// == Bi-directinal mapping===//
-	
-	@OneToMany(mappedBy="employeeId")
+
+	@OneToMany(mappedBy = "employeeId")
 	@JsonIgnore
 	private List<EmployeeRoleMapping> employeeRoleMappings;
-	
-	
-	private String password;
 
-
-	@OneToMany(mappedBy="empId")
+	// == Bi-directinal mapping===//
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "empId")
 	private List<FeedBack> feedBack;
+
+	// == Bi-directinal mapping===//
 	
-	@OneToMany(mappedBy="trainerName")
+	@JsonIgnore
+	@OneToMany(mappedBy = "trainerName")
 	private List<CourseAnnouncement> course;
-	
+
 	public List<FeedBack> getFeedBack() {
 		return feedBack;
 	}
@@ -107,7 +112,6 @@ public class EmployeeDetails {
 	public void setFeedBack(List<FeedBack> feedBack) {
 		this.feedBack = feedBack;
 	}
-
 
 	public Integer getEmployeeId() {
 		return employeeId;
@@ -252,6 +256,6 @@ public class EmployeeDetails {
 	public void setEmployeeRoleMappings(
 			List<EmployeeRoleMapping> employeeRoleMappings) {
 		this.employeeRoleMappings = employeeRoleMappings;
-	} 
-	
+	}
+
 }
