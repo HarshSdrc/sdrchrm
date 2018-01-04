@@ -13,6 +13,7 @@ public class UserDataModel {
 	
 	private String password;
 	
+	private Object submissionObject;
 	
 	public String getUserName() {
 		return userName;
@@ -32,9 +33,6 @@ public class UserDataModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-	private Object submissionObject;
 
 
 	public Object getSubmissionObject() {

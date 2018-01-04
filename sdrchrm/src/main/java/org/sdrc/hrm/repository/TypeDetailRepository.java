@@ -13,4 +13,6 @@ public interface TypeDetailRepository {
 
 	TypeDetail findById(int deviceTypeId);
 
+	TypeDetail findByName(String courseName);
+
 }

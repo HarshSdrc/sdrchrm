@@ -1,7 +1,5 @@
 package org.sdrc.hrm;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,8 +14,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -31,11 +27,6 @@ public class UserAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 		if (authentication.getCredentials() == null || userDetails.getPassword() == null) {
 			throw new BadCredentialsException("Credentials cannot be null");
 		}
-
-		 logger.info("<  UserName , {}",authentication.getCredentials());
-		 logger.info("<  Password , {}",userDetails.getPassword());
-		 logger.info("\n Password Encoded , {}",messageDigestPasswordEncoder.encodePassword(authentication.getName(), (String) authentication.getCredentials()));
-
 		 
 
 		if (!messageDigestPasswordEncoder.encodePassword(authentication.getName(), (String) authentication.getCredentials()).equals(userDetails.getPassword())) {

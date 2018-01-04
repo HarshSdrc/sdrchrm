@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-
+	
 /**
  * @author Harsh Pratyush (harsh@sdrc.co.in)
  *
@@ -35,7 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         
     }
 	
-
 	  @Autowired
 	   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		  auth.authenticationProvider(userAuthenticationProvider);

@@ -3,6 +3,8 @@
  */
 package org.sdrc.hrm.model;
 
+import java.util.List;
+
 /**
  * @author Harsh Pratyush(harsh@sdrc.co.in)
  *
@@ -52,6 +54,7 @@ public class ReturnModel {
 	public void setObject(Object object) {
 		this.object = object;
 	}
+
 	
 
 }

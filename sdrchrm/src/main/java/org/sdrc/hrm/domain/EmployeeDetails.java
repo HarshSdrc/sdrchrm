@@ -105,6 +105,7 @@ public class EmployeeDetails {
 	@OneToMany(mappedBy = "trainerName")
 	private List<CourseAnnouncement> course;
 
+
 	public List<FeedBack> getFeedBack() {
 		return feedBack;
 	}
@@ -258,4 +259,12 @@ public class EmployeeDetails {
 		this.employeeRoleMappings = employeeRoleMappings;
 	}
 
+	
+	public EmployeeDetails() {
+		super();
+	}
+
+	public EmployeeDetails(Integer integer) {
+		
+	}
 }

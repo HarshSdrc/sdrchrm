@@ -3,9 +3,13 @@
  */
 package org.sdrc.hrm.util;
 
+import java.text.SimpleDateFormat;
+
 import org.sdrc.hrm.domain.DeviceDetails;
 import org.sdrc.hrm.domain.EmployeeDetails;
+import org.sdrc.hrm.domain.EmployeeDeviceMapping;
 import org.sdrc.hrm.model.DeviceModel;
+import org.sdrc.hrm.model.EmployeeDeviceMappingModel;
 import org.sdrc.hrm.model.EmployeeModel;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Component
 public class DomainToModelConverter {
+	
+	private final SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 	
 	public EmployeeModel employeeDomainToModel(EmployeeDetails employeeDetails)
@@ -32,6 +38,8 @@ public class DomainToModelConverter {
 		return employeeModel;
 	}
 	
+	
+	
 	public DeviceModel deviceDomainToModel(DeviceDetails deviceDetails)
 	{
 		DeviceModel deviceModel= new DeviceModel();
@@ -43,5 +51,27 @@ public class DomainToModelConverter {
 			deviceModel.setDeviceTypeId(deviceDetails.getDeviceType().getId());
 		}
 		return deviceModel;
+	}
+	
+	
+	public EmployeeDeviceMappingModel employeeDeviceMappintToModel(EmployeeDeviceMapping employeeDeviceMapping)
+	{
+		EmployeeDeviceMappingModel employeeDeviceMappingModel = new EmployeeDeviceMappingModel();
+		
+		if(employeeDeviceMapping!=null)
+		{
+			ObjectMapper objectMapper = new ObjectMapper();
+			employeeDeviceMappingModel= objectMapper.convertValue(employeeDeviceMapping, EmployeeDeviceMappingModel.class);
+			employeeDeviceMappingModel.setAssignedBy(employeeDeviceMapping.getAssignedBy().getName());
+			if(employeeDeviceMapping.isReturned())
+			{
+			employeeDeviceMappingModel.setReturnedTo(employeeDeviceMapping.getReturnedTo().getName());
+			employeeDeviceMappingModel.setReturnedDate(sdf.format(employeeDeviceMapping.getReturnedDate()));
+			}
+			employeeDeviceMappingModel.setAsssignedDate(sdf.format(employeeDeviceMapping.getAsssignedDate()));
+			
+			
+		}
+		return employeeDeviceMappingModel;
 	}
 }
