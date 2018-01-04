@@ -7,19 +7,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author Subham Ashish (subham@sdrc.co.in)
+ *	16-May-2017
+ * 
+ */
+
 @Entity
 @Table(name = "feedback_question")
 public class FeedBackQuestionMaster {
 
 	@Id
-	@Column(name = "feedback_qstn_id")
+	@Column(name = "feedback_qstn_id_pk")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer questionId;
 
 	private String questions;
 
-	@Column(nullable=false)
-	private Integer orderid;
+	@Column(name="question_order",nullable=false)
+	private Integer questionOrder;
 
 	private String remarks;
 
@@ -49,11 +55,11 @@ public class FeedBackQuestionMaster {
 	}
 
 	public Integer getOrderid() {
-		return orderid;
+		return questionOrder;
 	}
 
 	public void setOrderid(Integer orderid) {
-		this.orderid = orderid;
+		this.questionOrder = orderid;
 	}
 
 }

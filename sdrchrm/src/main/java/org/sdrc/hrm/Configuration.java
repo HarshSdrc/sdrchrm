@@ -46,5 +46,5 @@ public class Configuration  extends  SpringBootServletInitializer{
 	public MessageDigestPasswordEncoder passwordEncoder() {
 		return new MessageDigestPasswordEncoder("sha-256");
 	}
-
+	
 }

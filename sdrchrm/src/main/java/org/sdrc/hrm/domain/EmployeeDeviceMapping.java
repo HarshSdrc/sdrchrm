@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Harsh Pratyush (harsh@sdrc.co.in)
  *	This entity class will contain the record of device assignment to users
@@ -28,10 +30,12 @@ public class EmployeeDeviceMapping {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long employeeDeviceMappingId;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(nullable=false)
 	private DeviceDetails deviceId;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(nullable=false)
 	private EmployeeDetails  employeeId;
@@ -39,14 +43,17 @@ public class EmployeeDeviceMapping {
 	@Column(nullable=false,columnDefinition = "boolean default TRUE")
 	private boolean isAssigned;
 	
+	@JsonIgnore
 	@CreationTimestamp
 	@Column(nullable = false)
 	private Timestamp asssignedDate;
 	
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(nullable=false)
 	private TypeDetail assignedBy;
+	
 	
 	@Column(nullable=false)
 	private String assigingDescription;
@@ -54,15 +61,18 @@ public class EmployeeDeviceMapping {
 	@Column(nullable=false,columnDefinition = "boolean default FALSE")
 	private boolean isReturned;
 	
+	@JsonIgnore
 	@UpdateTimestamp
 	private Timestamp returnedDate;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private TypeDetail returnedTo;
 	
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private String remarks;
+	
 	
 	@Column(nullable = false)
 	private String createdBy;

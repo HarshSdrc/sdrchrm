@@ -28,6 +28,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
         EmployeeDetails employee = employeeRepository.findByEmailIdAndIsLiveTrue(username);
+        
+        if(employee==null)
+        {
+        	throw new UsernameNotFoundException("No such user found");
+        }
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
         for (EmployeeRoleMapping empRoleMapping : employee.getEmployeeRoleMappings()){

@@ -4,6 +4,7 @@
 package org.sdrc.hrm.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -59,6 +61,11 @@ public class DeviceDetails {
 
 	@UpdateTimestamp
 	private Timestamp updatedDate;
+	
+	//==== bi-directional mapping=====
+	
+	@OneToMany(mappedBy="deviceId")
+	List<EmployeeDeviceMapping> employeeDeviceMapping;
 
 	public int getDeviceId() {
 		return deviceId;
@@ -138,6 +145,15 @@ public class DeviceDetails {
 
 	public void setUpdatedDate(Timestamp updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	public List<EmployeeDeviceMapping> getEmployeeDeviceMapping() {
+		return employeeDeviceMapping;
+	}
+
+	public void setEmployeeDeviceMapping(
+			List<EmployeeDeviceMapping> employeeDeviceMapping) {
+		this.employeeDeviceMapping = employeeDeviceMapping;
 	}
 
 }

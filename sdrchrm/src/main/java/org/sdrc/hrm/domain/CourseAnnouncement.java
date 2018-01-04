@@ -1,8 +1,5 @@
 package org.sdrc.hrm.domain;
 
-import java.sql.Time;
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,29 +9,34 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * @author Subham Ashish (subham@sdrc.co.in) 16-May-2017
+ * 
+ */
+
 @Entity
 @Table(name = "course_announcement")
 public class CourseAnnouncement {
 
-	@Column(name = "courseAnnouncement_id")
+	@Column(name = "courseAnnouncement_id_pk")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "course_code",unique=true)
+	@Column(name = "course_code", unique = true)
 	private String courseCode;
 
 	@Column(name = "start_date")
-	private Timestamp startDate;
+	private String startDate;
 
 	@Column(name = "end_date")
-	private Timestamp endDate;
+	private String endDate;
 
 	@Column(name = "start_time")
-	private Time from;
+	private String from;
 
 	@Column(name = "end_time")
-	private Time to;
+	private String to;
 
 	@Column(name = "email")
 	private String email;
@@ -42,19 +44,15 @@ public class CourseAnnouncement {
 	@Column(name = "course_structure_path")
 	private String coursePath;
 
-	@Column(name = "document_path")
-	private String documentPath;
-
 	@Column(name = "remarks")
 	private String remarks;
 
 	@ManyToOne
-	@JoinColumn(name = "course_name")
+	@JoinColumn(name = "course_name_fk")
 	private TypeDetail courseName;
 
-	
 	@ManyToOne
-	@JoinColumn(name="tariner_name_fk")
+	@JoinColumn(name = "tariner_name_fk")
 	private EmployeeDetails trainerName;
 
 	public Integer getId() {
@@ -73,39 +71,6 @@ public class CourseAnnouncement {
 		this.courseCode = courseCode;
 	}
 
-
-	public Timestamp getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Timestamp startDate) {
-		this.startDate = startDate;
-	}
-
-	public Timestamp getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Timestamp endDate) {
-		this.endDate = endDate;
-	}
-
-	public Time getFrom() {
-		return from;
-	}
-
-	public void setFrom(Time from) {
-		this.from = from;
-	}
-
-	public Time getTo() {
-		return to;
-	}
-
-	public void setTo(Time to) {
-		this.to = to;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -122,14 +87,6 @@ public class CourseAnnouncement {
 		this.coursePath = coursePath;
 	}
 
-	public String getDocumentPath() {
-		return documentPath;
-	}
-
-	public void setDocumentPath(String documentPath) {
-		this.documentPath = documentPath;
-	}
-
 	public String getRemarks() {
 		return remarks;
 	}
@@ -138,4 +95,51 @@ public class CourseAnnouncement {
 		this.remarks = remarks;
 	}
 
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
+	}
+
+	public TypeDetail getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(TypeDetail courseName) {
+		this.courseName = courseName;
+	}
+
+	public EmployeeDetails getTrainerName() {
+		return trainerName;
+	}
+
+	public void setTrainerName(EmployeeDetails trainerName) {
+		this.trainerName = trainerName;
+	}
 }
