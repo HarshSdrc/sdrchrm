@@ -38,8 +38,6 @@ public class DomainToModelConverter {
 		return employeeModel;
 	}
 	
-	
-	
 	public DeviceModel deviceDomainToModel(DeviceDetails deviceDetails)
 	{
 		DeviceModel deviceModel= new DeviceModel();

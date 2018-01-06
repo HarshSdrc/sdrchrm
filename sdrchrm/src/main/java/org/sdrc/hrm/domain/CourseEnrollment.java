@@ -31,8 +31,7 @@ public class CourseEnrollment {
 	@ManyToOne
 	@JoinColumn(name="course_code_fk")
 	private CourseAnnouncement courseCode;
-	
-	//trainee name who have enrolled(sent email)
+
 	@ManyToOne
 	@JoinColumn(name="trainee_name_fk")
 	private EmployeeDetails traineeName;
