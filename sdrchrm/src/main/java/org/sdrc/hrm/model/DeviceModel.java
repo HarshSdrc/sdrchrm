@@ -34,6 +34,66 @@ public class DeviceModel {
 	private Timestamp updatedDate;
 	
 	private int deviceTypeId;
+	
+	private String model;
+	
+	private String serialNo;
+	
+	private String firmWare;
+	
+	private String firmwareVersion;
+	
+	private String macAdress;
+	
+	private String purchaseDate;
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getSerialNo() {
+		return serialNo;
+	}
+
+	public void setSerialNo(String serialNo) {
+		this.serialNo = serialNo;
+	}
+
+	public String getFirmWare() {
+		return firmWare;
+	}
+
+	public void setFirmWare(String firmWare) {
+		this.firmWare = firmWare;
+	}
+
+	public String getFirmwareVersion() {
+		return firmwareVersion;
+	}
+
+	public void setFirmwareVersion(String firmwareVersion) {
+		this.firmwareVersion = firmwareVersion;
+	}
+
+	public String getMacAdress() {
+		return macAdress;
+	}
+
+	public void setMacAdress(String macAdress) {
+		this.macAdress = macAdress;
+	}
+
+	public String getPurchaseDate() {
+		return purchaseDate;
+	}
+
+	public void setPurchaseDate(String purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
 
 	public int getDeviceId() {
 		return deviceId;

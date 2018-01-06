@@ -41,15 +41,17 @@ public class CourseAnnouncement {
 	@Column(name = "email")
 	private String email;
 
+
 	@Column(name = "remarks")
 	private String remarks;
-
+	
 	@Column(name = "course_structure_path")
 	private String coursePath;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "course_name_fk")
 	private TypeDetail courseName;
+
 	
 	@ManyToOne
 	@JoinColumn(name = "tariner_name_fk")
@@ -77,6 +79,14 @@ public class CourseAnnouncement {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getCoursePath() {
+		return coursePath;
+	}
+
+	public void setCoursePath(String coursePath) {
+		this.coursePath = coursePath;
 	}
 
 	public String getRemarks() {
@@ -134,13 +144,4 @@ public class CourseAnnouncement {
 	public void setTrainerName(EmployeeDetails trainerName) {
 		this.trainerName = trainerName;
 	}
-
-	public String getCoursePath() {
-		return coursePath;
-	}
-
-	public void setCoursePath(String coursePath) {
-		this.coursePath = coursePath;
-	}
-
 }

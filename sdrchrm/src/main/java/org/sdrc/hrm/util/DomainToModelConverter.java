@@ -8,9 +8,11 @@ import java.text.SimpleDateFormat;
 import org.sdrc.hrm.domain.DeviceDetails;
 import org.sdrc.hrm.domain.EmployeeDetails;
 import org.sdrc.hrm.domain.EmployeeDeviceMapping;
+import org.sdrc.hrm.domain.TypeDetail;
 import org.sdrc.hrm.model.DeviceModel;
 import org.sdrc.hrm.model.EmployeeDeviceMappingModel;
 import org.sdrc.hrm.model.EmployeeModel;
+import org.sdrc.hrm.model.TypeDetailModel;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,8 +39,6 @@ public class DomainToModelConverter {
 		}
 		return employeeModel;
 	}
-	
-	
 	
 	public DeviceModel deviceDomainToModel(DeviceDetails deviceDetails)
 	{
@@ -73,5 +73,19 @@ public class DomainToModelConverter {
 			
 		}
 		return employeeDeviceMappingModel;
+	}
+	
+	
+	public TypeDetailModel typeDetailToModel(TypeDetail typeDetail)
+	{
+		TypeDetailModel typeDetailModel = new TypeDetailModel();
+		if(typeDetail!=null)
+		{
+			ObjectMapper objectMapper=new ObjectMapper();
+			typeDetailModel = objectMapper.convertValue(typeDetail, TypeDetailModel.class);
+			typeDetailModel.setTypeId(typeDetail.getTypeId().getId());
+			
+		}
+		return typeDetailModel;
 	}
 }

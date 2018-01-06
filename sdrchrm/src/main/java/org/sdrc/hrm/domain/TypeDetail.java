@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Harsh Pratyush (harsh@sdrc.co.in)
  *
@@ -30,6 +32,7 @@ public class TypeDetail {
 
 	private String name;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "type_id_fk", nullable = false)
 	private Type typeId;
@@ -49,7 +52,8 @@ public class TypeDetail {
 	
 	@Column(name="description")
 	private String description;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="courseName")
 	private List<CourseAnnouncement> course;
 

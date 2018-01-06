@@ -3,6 +3,9 @@
  */
 package org.sdrc.hrm.service;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -15,9 +18,14 @@ import org.sdrc.hrm.domain.TypeDetail;
 import org.sdrc.hrm.model.DeviceModel;
 import org.sdrc.hrm.model.EmployeeDeviceMappingModel;
 import org.sdrc.hrm.model.ReturnModel;
+import org.sdrc.hrm.model.TypeDetailModel;
 import org.sdrc.hrm.repository.DeviceDetailsRepository;
+import org.sdrc.hrm.repository.TypeDetailRepository;
 import org.sdrc.hrm.util.DomainToModelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 /**
@@ -39,9 +47,18 @@ public class DeviceServiceImpl implements DeviceService {
 
 	@Autowired
 	private DomainToModelConverter domainToModelConverter;
+	
+	@Autowired
+	private TypeDetailRepository typeDetailRepository;
+	
+	@Autowired
+	private ResourceBundleMessageSource messageSource;
+	
+	private final SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+
 
 	@Override
-	public ReturnModel addDevice(DeviceModel deviceModel) {
+	public ReturnModel addDevice(DeviceModel deviceModel) throws ParseException {
 
 		DeviceDetails deviceDetails = deviceDetailsRepository
 				.findByBarCode(deviceModel.getBarCode());
@@ -53,6 +70,14 @@ public class DeviceServiceImpl implements DeviceService {
 			deviceDetails=new DeviceDetails();
 			deviceDetails.setDescription(deviceModel.getDescription());
 			deviceDetails.setDeviceName(deviceModel.getDeviceName());
+			deviceDetails.setCreatedBy(((UserDetails)SecurityContextHolder.getContext().getAuthentication().getDetails()).getUsername());
+			deviceDetails.setMacAdress(deviceModel.getMacAdress());
+			deviceDetails.setModel(deviceModel.getModel());
+			deviceDetails.setFirmWare(deviceModel.getFirmWare());
+			deviceDetails.setFirmwareVersion(deviceModel.getFirmwareVersion());
+			deviceDetails.setPurchaseDate(new Date(sdf.parse(deviceModel.getPurchaseDate()).getTime()));
+			deviceDetails.setSerialNo(deviceModel.getSerialNo());
+			
 			if(device==null)
 			{
 				deviceDetails.setDeviceCode("sdrc/device/001");
@@ -75,10 +100,7 @@ public class DeviceServiceImpl implements DeviceService {
 			TypeDetail deviceType = new TypeDetail();
 			deviceType.setId(deviceModel.getDeviceTypeId());
 			deviceDetails.setDeviceType(deviceType);
-			deviceDetails.setCreatedBy(deviceDetails.getCreatedBy());
 			deviceDetails.setBarCode(deviceModel.getBarCode());
-			deviceDetails.setCreatedBy(deviceModel.getCreatedBy());
-
 			DeviceDetails deviceSaved=deviceDetailsRepository.save(deviceDetails);
 
 			returnModel.setStatusCode(200);
@@ -152,6 +174,22 @@ public class DeviceServiceImpl implements DeviceService {
 			returnModel.setStatusCode(400);
 		}
 		
+		return returnModel;
+	}
+
+	@Override
+	public ReturnModel getAllDeviceTypes() {
+		int deviceTypeId= Integer.parseInt(messageSource.getMessage("typeId.device", null,null));
+		List<TypeDetail> typeDetails =typeDetailRepository.findByTypeIdId(deviceTypeId);
+		List<TypeDetailModel> typeDetailModels = new ArrayList<TypeDetailModel>();
+		ReturnModel returnModel = new ReturnModel();
+		for(TypeDetail typeDetail:typeDetails)
+		{
+			typeDetailModels.add(domainToModelConverter.typeDetailToModel(typeDetail));
+		}
+		returnModel.setObject(typeDetailModels);
+		returnModel.setStatusCode(200);
+		// TODO Auto-generated method stub
 		return returnModel;
 	}
 

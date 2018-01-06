@@ -3,7 +3,6 @@
  */
 package org.sdrc.hrm.model;
 
-import java.util.List;
 
 /**
  * @author Harsh Pratyush(harsh@sdrc.co.in)
