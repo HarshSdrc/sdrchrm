@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 	
 /**
@@ -16,7 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  *
  */
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug=true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	
@@ -31,7 +32,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                     .anyRequest().authenticated()
                     .and()
                 .logout().logoutSuccessUrl("/login")
-                    .permitAll().and().csrf().disable();
+                    .permitAll().and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                    .and().csrf().ignoringAntMatchers("/login").disable();
         
     }
 	

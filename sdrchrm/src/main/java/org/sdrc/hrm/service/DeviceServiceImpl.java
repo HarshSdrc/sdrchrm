@@ -112,8 +112,8 @@ public class DeviceServiceImpl implements DeviceService {
 
 		else {
 			returnModel.setStatusCode(400);
-			returnModel.setDescription("failure");
-			returnModel.setMessage("failure");
+			returnModel.setDescription("This device has already been register.Do you want to add another device");
+			returnModel.setMessage("Failed");
 		}
 		return returnModel;
 	}

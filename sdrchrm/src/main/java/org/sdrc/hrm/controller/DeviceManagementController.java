@@ -62,9 +62,9 @@ public class DeviceManagementController {
 			 }
 			 else
 			 {
-					returnModel.setDescription("Not Authorized");
+					returnModel.setDescription("You need to login with Sysadmin Id to acess this feature");
 					returnModel.setMessage("Not Authorized");
-					returnModel.setStatusCode(400);
+					returnModel.setStatusCode(415);
 			 }
 	        }
 		 else
@@ -81,9 +81,9 @@ public class DeviceManagementController {
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			returnModel.setDescription("Authentication Failed");
-			returnModel.setMessage("Please Login");
-			returnModel.setStatusCode(400);
+			returnModel.setDescription("Please login again to proceed");
+			returnModel.setMessage("Authentication Failed");
+			returnModel.setStatusCode(415);
 			return returnModel;
 		}
 		
