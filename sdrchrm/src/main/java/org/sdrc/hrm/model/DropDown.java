@@ -2,14 +2,22 @@ package org.sdrc.hrm.model;
 
 import java.util.List;
 
-
 public class DropDown {
-	
+
 	private List<EmployeeModel> employeeModel;
 
+	private List<TypeDetailModel> typeDetailModel;
+
 	private Integer status;
-	
-	
+
+	public List<TypeDetailModel> getTypeDetailModel() {
+		return typeDetailModel;
+	}
+
+	public void setTypeDetailModel(List<TypeDetailModel> typeDetailModel) {
+		this.typeDetailModel = typeDetailModel;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -25,8 +33,5 @@ public class DropDown {
 	public void setEmployeeModel(List<EmployeeModel> employeeModel) {
 		this.employeeModel = employeeModel;
 	}
-
-	
-	
 
 }

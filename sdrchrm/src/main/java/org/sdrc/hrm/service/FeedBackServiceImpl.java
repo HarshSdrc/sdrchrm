@@ -30,6 +30,7 @@ import org.sdrc.hrm.model.CourseAnnouncementModel;
 import org.sdrc.hrm.model.DropDown;
 import org.sdrc.hrm.model.EmployeeModel;
 import org.sdrc.hrm.model.ReturnModel;
+import org.sdrc.hrm.model.TypeDetailModel;
 import org.sdrc.hrm.repository.CourseAnnouncementRepository;
 import org.sdrc.hrm.repository.EmployeeRepository;
 import org.sdrc.hrm.repository.TypeDetailRepository;
@@ -225,14 +226,16 @@ public class FeedBackServiceImpl implements FeedBackService {
 	 */
 	@Override
 	@Transactional
-	public DropDown getDropDownList(){
-
-		//shows all employess whose islive is true
+	public DropDown getDropDownList(){//shows all employess whose islive is true
 		DropDown dropDown = new DropDown();
 		
 		List<EmployeeDetails> employeeDetailsList = employeeRepository.findByIsLiveTrue();
 		
+		List<TypeDetail> typeDetailsList = typeDetailRepository.findByDescriptionOrderByName();
+		
 		List<EmployeeModel> employeeModelList = new ArrayList<EmployeeModel>();
+		
+		List<TypeDetailModel> typeDetailModelList = new ArrayList<TypeDetailModel>();
 		
 		if(!employeeDetailsList.isEmpty()){
 			
@@ -242,17 +245,32 @@ public class FeedBackServiceImpl implements FeedBackService {
 			
 			}
 		
-		dropDown.setEmployeeModel(employeeModelList);
-		dropDown.setStatus(200);
-		String reportPathDir = messageSource.getMessage("feedback.save.path", null, null);
-		return dropDown;
+			dropDown.setEmployeeModel(employeeModelList);
+	
+		}
 		
+		for(TypeDetail details : typeDetailsList){
+			
+			TypeDetailModel typeDetailmodel = new TypeDetailModel();
+			
+			typeDetailmodel.setId(details.getId());
+			typeDetailmodel.setName(details.getName());
+			typeDetailmodel.setDescription(details.getDescription());
+			//typeDetailmodel.setTypeId(details.getTypeId());
+			
+			typeDetailModelList.add(typeDetailmodel);
+			
+		}
+		
+		if(!typeDetailModelList.isEmpty()){
+			dropDown.setTypeDetailModel(typeDetailModelList);
+			dropDown.setStatus(200);
+			return dropDown;
 		}else{
 			dropDown.setStatus(400);
 			return dropDown;
 		}
-		
-	}
+			}
 
 
 	/* (non-Javadoc)

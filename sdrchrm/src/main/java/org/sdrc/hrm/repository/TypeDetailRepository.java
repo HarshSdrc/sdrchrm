@@ -19,4 +19,6 @@ public interface TypeDetailRepository {
 
 	List<TypeDetail> findByTypeIdId(int typeId);
 
+	List<TypeDetail> findByDescriptionOrderByName();
+
 }
