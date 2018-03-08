@@ -14,9 +14,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,7 +36,7 @@ public class DeviceManagementController {
 	@Autowired
 	private  UserAuthenticationProvider userAuthenticationProvider;
 	
-	@RequestMapping(value="/addDevice",method=RequestMethod.POST)
+	@PostMapping(value="/addDevice")
 	public ReturnModel addDevice(@RequestBody UserDataModel userDataModel)
 	{
 		ReturnModel returnModel = new ReturnModel();
@@ -89,7 +88,7 @@ public class DeviceManagementController {
 		
 	}
 	
-	@RequestMapping(value="/getAllDevice",method=RequestMethod.POST)
+	@PostMapping(value="/getAllDevice")
 	public ReturnModel getAllDevice(@RequestBody UserDataModel userDataModel)
 	{
 		ReturnModel returnModel = new ReturnModel();
@@ -132,7 +131,7 @@ public class DeviceManagementController {
 		 return returnModel;
 	}
 	
-	@RequestMapping(value="/getDeviceHistory",method=RequestMethod.POST)
+	@PostMapping(value="/getDeviceHistory")
 	public ReturnModel getDeviceHistory(@RequestBody UserDataModel userDataModel)
 	{
 		ReturnModel returnModel = new ReturnModel();
@@ -172,7 +171,7 @@ public class DeviceManagementController {
 		 return returnModel;
 	}
 	
-	@RequestMapping(value="/getDeviceType",method=RequestMethod.POST)
+	@PostMapping(value="/getDeviceType")
 	public ReturnModel getDeviceType(@RequestBody UserDataModel userDataModel)
 	{
 		ReturnModel returnModel = new ReturnModel();

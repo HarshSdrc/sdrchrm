@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 	
@@ -24,6 +25,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private  UserAuthenticationProvider userAuthenticationProvider;
 	
+	@Autowired
+	private  UserDetailsService userDetailsService;
+	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -33,7 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                     .and().formLogin().defaultSuccessUrl("/home").loginPage("/login")
                     .and()
                 .logout().logoutSuccessUrl("/login")
-                    .permitAll().and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                    .permitAll().and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                    .and().userDetailsService(userDetailsService);
         
     }
 	

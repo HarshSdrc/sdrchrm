@@ -16,9 +16,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -31,7 +30,7 @@ public class LoginController {
 	@Autowired
 	private  UserAuthenticationProvider userAuthenticationProvider;
 	
-	@RequestMapping(value="/login",method=RequestMethod.POST)
+	@PostMapping(value="/login")
 	public ReturnModel login(@RequestBody UserDataModel userDataModel,HttpServletResponse response,HttpServletRequest request)
 	{
 		ReturnModel returnModel=new ReturnModel();

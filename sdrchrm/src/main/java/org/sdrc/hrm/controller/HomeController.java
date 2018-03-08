@@ -4,7 +4,7 @@ import org.sdrc.hrm.model.EmployeeModel;
 import org.sdrc.hrm.service.EmployeeDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -21,7 +21,7 @@ public class HomeController {
 	EmployeeDetailsService employeeDetailsService;
 	
 	@ResponseBody
-	@RequestMapping(value={"/home","/"})
+	@GetMapping(value={"/home","/"})
 	public String home()
 	{
 		return "done";
@@ -29,7 +29,7 @@ public class HomeController {
 	
 	
 	@ResponseBody
-	@RequestMapping("employee")
+	@GetMapping("employee")
 	public EmployeeModel employee()
 	{
 		return employeeDetailsService.findEmployeeByCode("1091");
