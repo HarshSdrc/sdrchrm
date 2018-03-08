@@ -30,10 +30,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                     .antMatchers("/resources/**", "/**").permitAll()
                     .anyRequest().authenticated()
+                    .and().formLogin().defaultSuccessUrl("/home").loginPage("/login")
                     .and()
                 .logout().logoutSuccessUrl("/login")
-                    .permitAll().and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .and().csrf().ignoringAntMatchers("/login").disable();
+                    .permitAll().and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         
     }
 	

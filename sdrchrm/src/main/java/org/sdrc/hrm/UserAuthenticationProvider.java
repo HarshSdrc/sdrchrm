@@ -29,7 +29,8 @@ public class UserAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 		}
 		 
 
-		if (!messageDigestPasswordEncoder.encodePassword(authentication.getName(), (String) authentication.getCredentials()).equals(userDetails.getPassword())) {
+		
+		if (!messageDigestPasswordEncoder.isPasswordValid(userDetails.getPassword(), (String) authentication.getCredentials(), authentication.getName())) {
 			throw new BadCredentialsException("Invalid Credentials !");
 		}
 		authentication.setDetails(userDetails);
