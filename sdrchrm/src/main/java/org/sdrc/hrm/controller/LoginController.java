@@ -37,20 +37,7 @@ public class LoginController {
 		ReturnModel returnModel=new ReturnModel();
 		try
 		{
-//			System.out.println("Before Login");
-//			
-//			for(String header :response.getHeaderNames())
-//			{
-//				System.out.println("Header : "+ header +" value : "+response.getHeader(header));
-//			}
-//			
-//			Enumeration enums=request.getHeaderNames();
-//			while(enums.hasMoreElements())
-//			{
-//				System.out.println("Headers : "+ enums.nextElement() +" value : "+request.getHeader(enums.nextElement().toString()));
-//			}
-			
-			
+					
 		UserDetails userDetails=userDetailsService.loadUserByUsername(userDataModel.getUserName());
 		
 		
@@ -69,19 +56,6 @@ public class LoginController {
 		 returnModel.setDescription("");
 		 returnModel.setStatusCode(200);
 		returnModel.setObject(userDetailModel);
-		
-//		System.out.println("After Login");
-//		
-//		for(String header :response.getHeaderNames())
-//		{
-//			System.out.println("Header : "+ header +" value : "+response.getHeader(header));
-//		}
-//		
-//		 enums=request.getHeaderNames();
-//		while(enums.hasMoreElements())
-//		{
-//			System.out.println("Headers : "+ enums.nextElement() +" value : "+request.getHeader(enums.nextElement().toString()));
-//		}
 		
 		}
 		
