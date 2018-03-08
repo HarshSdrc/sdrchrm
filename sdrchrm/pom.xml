@@ -5,6 +5,15 @@
 	<artifactId>sdrchrm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<description>This is a inhouse microservice project</description>
+	<developers>
+	<developer>
+	<name>Harsh Pratyush</name>
+	<email>harsh@sdrc.co.in</email>
+	<organization>SDRC Bhubaneswar</organization>
+	<organizationUrl>https://sdrc.co.in</organizationUrl>
+	</developer>
+	</developers>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -22,6 +31,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 
+		</dependency>
+		
+		<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
 		<!-- commons.io -->
@@ -88,4 +102,6 @@
 			</plugin>
 		</plugins>
 	</build>
+	<name>sdrchrm</name>
+	<url>sdrchrm</url>
 </project>
